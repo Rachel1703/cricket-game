@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="team1">
+                    <h1> Team 1 </h1>
+                    <b>Score : </b>
+                    <p id="t1"></p>
+                    <p id="total"></p>
+                    <button class="btn btn-primary" onclick="runs1()" id="b1">Bat</button>
+                    <p Style="color:red" id="p1"></p>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <div class="team2">
+                    <h1> Team 2 </h1>
+                    <b>Score : </b>
+                    <p id="t2"></p>
+                    <p id="total2"></p>
+                    <button class="btn btn-primary" onclick="runs2()" id="b2">Bat</button>
+                    <p Style="color:red" id="p2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-lg btn-success"><a href="result.html">Report</a></button>
+
+        </div>
+
+
+
+    </div>
+
+    <script>
+        var arr = [];
+        var arr2 = [];
+        count = count1 = 0;
+        var totalBall = 18;
+        var totalBall2 = 18;
+        var res, res2;
+
+        function runs1() {
+            document.getElementById("b2").disabled = true;
+            totalBall = totalBall - 1;
+            if (totalBall >= 0 && count < 5) {
+                var min = 0;
+                var max = 6;
+                var random = Math.floor(Math.random() * (+max - +min)) + +min;
+                if (random == 0) {
+                    count = count + 1;
+                    document.getElementById('p1').innerText = "Player" + count + " Out";
+                }
+                arr.push(random);
+                document.getElementById('t1').innerText = arr;
+
+                document.getElementById("total").innerHTML = arr.reduce(getSum, 0);
+                res = document.getElementById("total").innerHTML;
+
+                function getSum(total, num) {
+                    return total + (num);
+                }
+            }
+            else {
+                localStorage.setItem('res', res);
+                console.log(localStorage.getItem('res'));
+                document.getElementById("b2").disabled = false;
+            }
+        }
+
+        function runs2() {
+            document.getElementById("b1").disabled = true;
+            totalBall2 = totalBall2 - 1;
+            if (totalBall2 >= 0 && count1 < 5) {
+                var min = 0;
+                var max = 6;
+                var random = Math.floor(Math.random() * (+max - +min)) + +min;
+                if (random == 0) {
+                    count2 = count2 + 1;
+                    document.getElementById('p2').innerText = "Player" + count1 + " Out";
+                }
+                arr2.push(random);
+                document.getElementById('t2').innerText = arr2;
+
+                document.getElementById("total2").innerHTML = arr2.reduce(getSum, 0);
+                res2 = document.getElementById("total2").innerHTML;
+
+                function getSum(total, num) {
+                    return total + (num);
+                }
+
+            }
+            else {
+                localStorage.setItem('res2', res2);
+                console.log(localStorage.getItem('res2'));
+                document.getElementById("b1").disabled = false;
+            }
+
+        }
+    </script>
+</body>
+
+</html>
